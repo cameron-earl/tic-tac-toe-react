@@ -1,0 +1,72 @@
+.square {
+  flex-grow: 1;
+  width: 30%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background-color: black;
+  box-sizing: border-box;
+
+  .content {
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+
+    > * {
+      max-width: 80%;
+      max-height: 80%;
+    }
+  }
+
+  &::after {
+    content: '';
+    float: left;
+    padding-top: 100%;
+  }
+
+  &.clickable:hover {
+    .content {
+      background-color: rgb(208, 255, 251);
+    }
+    cursor: pointer;
+  }
+
+  &:nth-of-type(1),
+  &:nth-of-type(4),
+  &:nth-of-type(7) {
+    .content {
+      left: 0;
+    }
+  }
+
+  &:nth-of-type(3),
+  &:nth-of-type(6),
+  &:nth-of-type(9) {
+    .content {
+      right: 0;
+    }
+  }
+
+  &:nth-of-type(1),
+  &:nth-of-type(2),
+  &:nth-of-type(3) {
+    .content {
+      top: 0;
+    }
+  }
+
+  &:nth-of-type(7),
+  &:nth-of-type(8),
+  &:nth-of-type(9) {
+    .content {
+      bottom: 0;
+    }
+  }
+}

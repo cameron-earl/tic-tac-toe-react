@@ -1,0 +1,12 @@
+.container {
+  flex-grow: 1;
+  padding-top: 2em;
+}
+
+.board {
+  max-width: 90vh;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
