@@ -36,7 +36,7 @@ export class CPU {
 
   constructor(strategy: Strategy, name: string) {
     this.strategy = strategy;
-    this.name = `CPU (${name})`;
+    this.name = name;
   }
 
   public makeMove = (gameArr: GameArray): GameArray => {
@@ -200,9 +200,10 @@ const perfect: Strategy = (moveArr, gameArr, valCoords) => {
   return hard(moveArr);
 };
 
-const strategies = [random, easy, medium, hard, perfect];
-
-export const cpus: { [key: string]: CPU } = strategies.reduce((obj, s) => {
-  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-  return { ...obj, [s.name]: new CPU(s, capitalize(s.name)) };
-}, {});
+export const cpus = {
+  random: new CPU(random, 'Random'),
+  easy: new CPU(easy, 'Easy'),
+  medium: new CPU(medium, 'Medium'),
+  hard: new CPU(hard, 'Hard'),
+  perfect: new CPU(perfect, 'Perfect'),
+};
