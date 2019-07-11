@@ -1,30 +1,63 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
-import SquareVal from '../../Types/SquareVal';
+import { GameArray, Line } from '../../Types/GameArray';
+import { SquareVal, XO } from '../../Types/SquareVal';
+import { lineIndex } from '../../Types/WinningCoords';
+import { isGameOver, nextMove, updateGameArr } from '../../utils/gameUtils';
 import styles from './Board.module.scss';
+import Slash from './Slash/Slash';
 import Square from './Square/Square';
 
-export default function Board() {
-  // Declare a new state variable, which we'll call "count"
-  const [squareVals, setSquareVals] = useState('_________');
-  const [playerVal, setPlayerVal] = useState('X');
+type BoardProps = {
+  gameArr: GameArray;
+  setGameArr: (arg0: GameArray) => void;
+};
 
-  const clickSquare = (i: number) => () => {
-    console.log(`Clicked square ${i}!`);
-    const newSquareVals = squareVals.slice(0, i) + playerVal + squareVals.slice(i + 1);
-    setSquareVals(newSquareVals);
-    setPlayerVal(playerVal === 'X' ? 'O' : 'X');
+const Board = ({ gameArr, setGameArr }: BoardProps) => {
+  const gameOver = !gameArr ? null : isGameOver(gameArr);
+  useEffect(() => {
+    const handleKeyPress = (ev: KeyboardEvent) => {
+      if (!gameArr || gameOver) return;
+      if (/^[1-9]$/.test(ev.key)) {
+        const n = +ev.key - 1;
+        const r = (2 - Math.floor(n / 3)) as lineIndex;
+        const c = (n % 3) as lineIndex;
+        clickSquare(r, c)();
+      }
+    };
+    document.addEventListener('keypress', handleKeyPress);
+    return () => document.removeEventListener('keypress', handleKeyPress);
+  }, [gameArr, gameOver]);
+
+  if (!gameArr) return null;
+  const winningSquares = gameOver ? gameOver[1] : null;
+  const currentSymbol = nextMove(gameArr);
+
+  const clickSquare = (r: lineIndex, c: lineIndex) => () => {
+    console.debug('clickSquare', r, c);
+    const newGameArr = updateGameArr(gameArr, r, c, currentSymbol as XO);
+    setGameArr(newGameArr);
   };
 
-  const squares = squareVals
-    .split('')
-    .map((val: string, i: number) => (
-      <Square key={'square' + i} handleClick={clickSquare(i)} status={val as SquareVal} />
-    ));
+  const squares = gameArr.map((row: Line, r: number) =>
+    row.map((val: string, c: number) => (
+      <Square
+        key={'square' + (r * 3 + c)}
+        gameOver={!!gameOver}
+        handleClick={clickSquare(r as lineIndex, c as lineIndex)}
+        status={val as SquareVal}
+      />
+    ))
+  );
 
   return (
     <div className={styles.container}>
-      <div className={styles.board}>{squares}</div>
+      <div className={styles.board}>
+        {squares}
+        <Slash winningSquares={winningSquares} />
+      </div>
     </div>
   );
-}
+};
+
+export default Board;

@@ -1,3 +1,3 @@
-type SquareVal = 'X' | 'O' | '_';
+export type XO = 'X' | 'O';
 
-export default SquareVal;
+export type SquareVal = XO | '_';

@@ -1,0 +1,48 @@
+.slash {
+  width: 100%;
+  position: relative;
+  z-index: 4;
+  margin-top: -100%;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.rot90 {
+  transform: rotate(90deg);
+}
+
+.rot180 {
+  transform: rotate(180deg);
+}
+
+.rot270 {
+  transform: rotate(270deg);
+}
+
+.slash > svg > path {
+  stroke: rgba(0, 150, 0, 1);
+  stroke-width: 4;
+  fill: transparent;
+  stroke-linecap: round;
+  animation-name: stroke-pulse;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes stroke-pulse {
+  0% {
+    stroke-width: 4;
+    // stroke: green;
+  }
+  50% {
+    stroke-width: 2;
+    // stroke: cyan;
+  }
+  100% {
+    stroke-width: 4;
+    // stroke: green;
+  }
+}

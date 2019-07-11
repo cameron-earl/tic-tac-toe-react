@@ -1,0 +1,25 @@
+@mixin button-reset {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button {
+  @include button-reset;
+  padding: 10px;
+  background-color: #4cbe00;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.button:hover {
+  filter: brightness(115%);
+}
+
+.button:active {
+  transform: translate(1px, 1px);
+  filter: brightness(90%);
+}

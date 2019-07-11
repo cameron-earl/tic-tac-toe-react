@@ -1,0 +1,61 @@
+$base-color: #ddd;
+$hover-color: #fff;
+
+.input {
+  border-bottom: 1px dotted $base-color;
+  cursor: pointer;
+  display: inline-block;
+  padding: 3px;
+  position: relative;
+  text-align: left;
+
+  .arrow-down {
+    margin-top: 5px;
+    margin-left: 5px;
+    position: relative;
+    float: right;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent !important;
+    border-right: 7px solid transparent !important;
+    border-top: 10px solid $base-color;
+    border-bottom: none;
+  }
+}
+
+.input:hover {
+  color: $hover-color;
+  border-color: $hover-color;
+
+  .arrow-down {
+    border-top: 10px solid $hover-color;
+  }
+}
+
+.options {
+  margin-left: -3px;
+  padding-left: 0;
+  position: absolute;
+  z-index: 5;
+  margin-top: 5px;
+  display: block;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  min-width: 100%;
+  text-align: left;
+  box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.options > .option + .option {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.option {
+  padding: 3px;
+  border: 1px solid transparent;
+}
+
+.option:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
