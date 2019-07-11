@@ -18,7 +18,7 @@ const App: React.FC = () => {
   const [firstPlayer, setFirstPlayer] = useState(0 as PlayerIndex);
   const getStartMessage = (): string => 'You are ' + ['X', 'O'][firstPlayer];
   const [message, setMessage] = useState(getStartMessage());
-  const [players, setPlayers] = useState([null, cpus.perfect] as PlayerArr);
+  const [players, setPlayers] = useState([null, cpus.easy] as PlayerArr);
   const [gameOverHandled, setGameOverHandled] = useState(false);
   const [gameCount, setGameCount] = useState(0);
 

@@ -200,7 +200,7 @@ const perfect: Strategy = (moveArr, gameArr, valCoords) => {
   return hard(moveArr);
 };
 
-const strategies = [random, first, easy, medium, hard, perfect];
+const strategies = [random, easy, medium, hard, perfect];
 
 export const cpus: { [key: string]: CPU } = strategies.reduce((obj, s) => {
   const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
