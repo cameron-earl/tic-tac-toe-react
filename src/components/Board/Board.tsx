@@ -34,7 +34,6 @@ const Board = ({ gameArr, setGameArr }: BoardProps) => {
   const currentSymbol = nextMove(gameArr);
 
   const clickSquare = (r: lineIndex, c: lineIndex) => () => {
-    console.debug('clickSquare', r, c);
     const newGameArr = updateGameArr(gameArr, r, c, currentSymbol as XO);
     setGameArr(newGameArr);
   };

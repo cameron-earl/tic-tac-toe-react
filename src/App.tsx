@@ -18,7 +18,7 @@ const App: React.FC = () => {
   const [firstPlayer, setFirstPlayer] = useState(0 as PlayerIndex);
   const getStartMessage = (): string => 'You are ' + ['X', 'O'][firstPlayer];
   const [message, setMessage] = useState(getStartMessage());
-  const [players, setPlayers] = useState([null, cpus.easy] as PlayerArr);
+  const [players, setPlayers] = useState([null, cpus.medium] as PlayerArr);
   const [gameOverHandled, setGameOverHandled] = useState(false);
   const [gameCount, setGameCount] = useState(0);
 
@@ -30,9 +30,15 @@ const App: React.FC = () => {
   const gameOver = isGameOver(gameArr);
 
   const resetGame = () => {
-    setMessage('You are ' + ['O', 'X'][firstPlayer]);
     setFirstPlayer(+!firstPlayer as 0 | 1);
     setGameArr(newGameArray());
+    if (!players[0]) {
+      if (!!players[1]) {
+        setMessage('You are ' + ['O', 'X'][firstPlayer]);
+      } else {
+        setMessage(`${playerNames[firstPlayer]} is X!`);
+      }
+    }
     setGameOverHandled(false);
   };
 
